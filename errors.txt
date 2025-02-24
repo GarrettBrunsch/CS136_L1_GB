@@ -1,0 +1,7 @@
+XYZO1234  Camry               Toyota                     3    15000.00 - First 4 characters must be alpha only (excluding O); 
+ABCD0234  Civic               Honda                      5    14000.00 - Second set of 4 characters must be 1-9; 
+ABC1234   Accord              Honda                      2    13500.00 - ID must be 8 characters; First 4 characters must be alpha only (excluding O); Second set of 4 characters must be 1-9; 
+ABCDEF12  M                   BMW                        1    15000.00 - Second set of 4 characters must be 1-9; Second set of 4 characters must be 1-9; Model contains less than minimum required characters; 
+WXYZ1234  3Series             BMW                        4    16000.00 - Model does not start with an alpha character; 
+DEFG1234  Corolla             Toyota                    -1    20000.00 - Quantity must be at least 0; 
+HIJK1234  Altima              Nissan                     5    12998.00 - Price must be above minimum price; 
