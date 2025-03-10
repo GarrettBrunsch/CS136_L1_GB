@@ -123,10 +123,10 @@ string CarRecord::toString() const
     //All numerical values must be right aligned to adhere to assignment instructions
     stringstream ss;
     ss << left << setw(10) << carId
-       << left << setw(20) << carModel
-       << left << setw(20) << carManufacturer
-       << right << setw(8) << carQuantity
-       << right << setw(12) << fixed << setprecision(2) << carPrice;
+        << left << setw(20) << carModel
+        << left << setw(20) << carManufacturer
+        << right << setw(8) << carQuantity
+        << right << setw(12) << fixed << setprecision(2) << carPrice;
     return ss.str();
 }
 
@@ -140,17 +140,17 @@ void CarRecord::printHeader(bool includeErrorColumn)
 
     if (includeErrorColumn)
     {
-        cout << left <<setw(30) << "   Error Message" // Three spaces added here to compensate for " - " format in table rows
-            << "\n" << string(100, '-') << "\n"; 
+        cout << left << setw(30) << "   Error Message" // Three spaces added here to compensate for " - " format in table rows
+            << "\n" << string(100, '-') << "\n";
     }
     else
     {
         cout << "\n" << string(70, '-') << "\n";
     }
-        
+
 }
 
-bool CarRecord::readInventory() 
+bool CarRecord::readInventory()
 {
     bool success = true;
     ifstream inFile(INPUT_FILENAME);
@@ -166,15 +166,15 @@ bool CarRecord::readInventory()
             "Program now exiting..." << endl;
         exit(EXIT_FAILURE); //Exit_failure preferred in instructions 
     }
-    else if (!errorFile)
+    if (!errorFile)
     {
-        inFile.close(); 
-        cout << "Error opening " << ERROR_FILENAME << 
+        inFile.close();
+        cout << "Error opening " << ERROR_FILENAME <<
             "\nDouble check the file exists in the proper directory and try again\n"
             "Program now exiting..." << endl;
-        exit(EXIT_FAILURE); 
+        exit(EXIT_FAILURE);
     }
-    else if (inFile.peek() == EOF)
+    if (inFile.peek() == EOF)
     {
         cout << "Input file is empty\n";
         success = false;
@@ -210,7 +210,7 @@ bool CarRecord::readInventory()
     return success;
 }
 
-void CarRecord::printInventory() 
+void CarRecord::printInventory()
 {
     cout << "\nCurrenent Inventory:\n";
     printHeader();
@@ -221,25 +221,25 @@ void CarRecord::printInventory()
     }
 }
 
-void CarRecord::printErrorFile() 
+void CarRecord::printErrorFile()
 {
     bool hasErrors = false;
     ifstream errorFile(ERROR_FILENAME);
     string line;
 
-        cout << "\nInvalid Records:\n";
-        printHeader(true);
+    cout << "\nInvalid Records:\n";
+    printHeader(true);
 
-        while (getline(errorFile, line))
-        {
-            cout << line << "\n";
-            hasErrors = true;
-        }
+    while (getline(errorFile, line))
+    {
+        cout << line << "\n";
+        hasErrors = true;
+    }
 
-        if (!hasErrors)
-        {
-            cout << "No invalid records found\n";
-        }
+    if (!hasErrors)
+    {
+        cout << "No invalid records found\n";
+    }
 }
 
 void CarRecord::validateRecord()
@@ -253,24 +253,24 @@ void CarRecord::validateRecord()
     isValidQuantity(carQuantity, errorMessage);
 }
 
-bool CarRecord::isValidId(const string& carId, string& errorMessage) 
+bool CarRecord::isValidId(const string& carId, string& errorMessage)
 {
-    if (carId.length() != MAX_ID_LENGTH) 
+    if (carId.length() != MAX_ID_LENGTH)
     {
         errorMessage += "ID must be 8 characters; ";
         validationStatus = false;
     }
 
-    for (int i = 0; i < (MAX_ID_LENGTH / 2); i++) 
+    for (int i = 0; i < (MAX_ID_LENGTH / 2); i++)
     {
-        if (!isalpha(carId[i]) || carId[i] == 'O' || carId[i] == 'o') 
+        if (!isalpha(carId[i]) || carId[i] == 'O' || carId[i] == 'o')
         {
             errorMessage += "First 4 characters must be alpha only (excluding O); ";
             validationStatus = false;
         }
     }
 
-    for (int i = (MAX_ID_LENGTH / 2); i < MAX_ID_LENGTH; i++) 
+    for (int i = (MAX_ID_LENGTH / 2); i < MAX_ID_LENGTH; i++)
     {
         if (carId[i] < '1' || carId[i] > '9')
         {
@@ -281,9 +281,9 @@ bool CarRecord::isValidId(const string& carId, string& errorMessage)
     return validationStatus;
 }
 
-bool CarRecord::isValidCarModel(const string& carModel, string& errorMessage) 
+bool CarRecord::isValidCarModel(const string& carModel, string& errorMessage)
 {
-    if (carModel.length() < MIN_MODEL_LENGTH) 
+    if (carModel.length() < MIN_MODEL_LENGTH)
     {
         errorMessage += "Model contains less than minimum required characters; ";
         validationStatus = false;
