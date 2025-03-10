@@ -15,8 +15,6 @@
 #include <limits>
 using namespace std;
 
-static const string INPUT_FILENAME = "inventory.txt";
-static const string ERROR_FILENAME = "errors.txt";
 enum MenuChoice { PRINT_UNSORTED_INVENTORY = 1, PRINT_INVALID_RECORDS, QUIT };
 
 void displayMenu();
@@ -28,6 +26,8 @@ private:
     static const int MAX_RECORDS = 25;
     static CarRecord inventory[MAX_RECORDS];
     static int recordCount;
+    static const string INPUT_FILENAME;
+    static const string ERROR_FILENAME;
 
     string carId = "Unknown";
     string carModel = "Unknown";
@@ -110,6 +110,8 @@ void clearInputError()
 
 CarRecord CarRecord::inventory[MAX_RECORDS];
 int CarRecord::recordCount = 0;
+const string CarRecord::INPUT_FILENAME = "inventory.txt";
+const string CarRecord::ERROR_FILENAME = "errors.txt";
 const double CarRecord::MIN_PRICE = 12999.00;
 
 CarRecord::CarRecord() : carId(""), carModel(""), carManufacturer(""), carQuantity(0), carPrice(0.0) {}
